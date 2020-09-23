@@ -5,7 +5,7 @@ class Livro (override val nome: String,
              val autor: String,
              val anoDeLancamento: Int,
              val edicao: Int): Comparable<Livro>{
-    override lateinit codigo
+    override lateinit codigo: String
 
     companion object { var code = 1000 }
     init { codigo = "L${code++}" }
