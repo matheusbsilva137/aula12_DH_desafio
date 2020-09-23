@@ -6,7 +6,21 @@ class Livraria {
 
 
     fun cadastrar(item: Consultavel) {
-        consultaveis += item
+        cadastrar(item, 0)
+    }
+
+    fun cadastrar(item: Consultavel, quantidadeEstoque: Int) {
+        if (consultaveis.containsKey(item.codigo)) throw IllegalArgumentException("Produto já cadastrado")
+        consultaveis.put(item.codigo, item)
+        adicionarEstoque(item, quantidadeEstoque)
+    }
+
+    fun adicionarEstoque(item: Consultavel, quantidade: Int) {
+        adicionarEstoque(item.codigo, quantidade)
+    }
+
+    fun adicionarEstoque(codigo: String, quantidade: Int) {
+        estoque[codigo] = estoque.getOrDefault(codigo, 0) + 1
     }
 
     fun consultarCodigo(codigo: String): Consultavel =
