@@ -20,7 +20,7 @@ class Livraria {
     }
 
     fun adicionarEstoque(codigo: String, quantidade: Int) {
-        estoque[codigo] = estoque.getOrDefault(codigo, 0) + 1
+        estoque[codigo] = estoque.getOrDefault(codigo, 0) + quantidade
     }
 
     fun consultarCodigo(codigo: String): Consultavel =
