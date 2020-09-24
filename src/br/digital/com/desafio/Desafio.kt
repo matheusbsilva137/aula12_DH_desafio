@@ -8,7 +8,7 @@ fun main(){
     var ent: String? = null
     val livraria: Livraria = Livraria()
 
-    while(op != 0){
+    loop@ while(op != 0){
         try {
             println()
             println(" --- SISTEMA DE LIVRARIA")
@@ -23,6 +23,7 @@ fun main(){
             op = ent.toInt()
 
             when (op) {
+                0 -> break@loop
                 1 -> {
                     var quantCadastros: Int = 0
                     var titulo: String? = null
@@ -57,9 +58,9 @@ fun main(){
                         do ent = readLine() while (ent == null)
                         preco = ent.toBigDecimal()
 
-                        var livro = Livro(titulo, preco, autor, anoLanc, volume)
+                        val livro = Livro(titulo, preco, autor, anoLanc, volume)
 
-                        println(" - Deseja cadastrar a quantidade de livros? (quantidades não informadas serão usadas como ZERO)")
+                        println(" - Existe estoque disponível para esse livro? (se não informar o estoque será ZERO)")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
                         do ent = readLine() while (ent == null || (ent != "0" && ent != "1"))
@@ -74,7 +75,7 @@ fun main(){
                             livraria.cadastrar(livro, quant)
                         }
 
-                        println(" **** Livro cadastrado com o código ${livro.toString()}.")
+                        println(" **** Livro cadastrado com o código ${livro.codigo}.")
                         println("Deseja cadastrar mais um livro?")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
@@ -125,7 +126,7 @@ fun main(){
                         }
                         var colecao = Colecao(preco, titulo, *livraria.pesquisarLivros(codigos).toTypedArray())
 
-                        println(" - Deseja cadastrar a quantidade de coleções? (quantidades não informadas serão usadas como ZERO)")
+                        println(" - Existe estoque disponível para essa coleção? (se não informar o estoque será ZERO)")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
                         do ent = readLine() while (ent == null || (ent != "0" && ent != "1"))
@@ -140,7 +141,7 @@ fun main(){
                             livraria.cadastrar(colecao, quant)
                         }
 
-                        println(" **** Coleção cadastrada com o código ${colecao.toString()}.")
+                        println(" **** Coleção cadastrada com o código ${colecao.codigo}.")
                         println("Deseja cadastrar mais uma coleção?")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
@@ -157,11 +158,7 @@ fun main(){
                         val item = livraria.consultarCodigo(cod ?: "")
                         if (item is Livro) {
                             println(" - Livro '$cod' encontrado!")
-                            println(" ----> Titulo: ${item.titulo}")
-                            println(" ----> Autor: ${item.autor}")
-                            println(" ----> Edição: ${item.edicao}")
-                            println(" ----> Ano de Lançamento: ${item.anoDeLancamento}")
-                            println(" ----> Preço: R$${item.preco}")
+                            println(item.toString())
                         } else if (item is Colecao) {
                             println(" - Coleção '$cod' encontrada!")
                             println(" ----> Titulo da Coleção: ${item.titulo}")
@@ -170,14 +167,10 @@ fun main(){
                             item.listaDeLivros.forEach {
                                 if (it is Livro) {
                                     println("     LIVRO:")
-                                    println("     --> Titulo: ${it.titulo}")
-                                    println("     --> Autor: ${it.autor}")
-                                    println("     --> Edição: ${it.edicao}")
-                                    println("     --> Ano de Lançamento: ${it.anoDeLancamento}")
-                                    println("     --> Preço: R$${it.preco}")
+                                    println(it.toString())
                                 } else if (it is Colecao) {
                                     println("     COLEÇÃO:")
-                                    println("     --> Titulo da Coleção: ${item.titulo}")
+                                    println(it.toString())
                                     println("     --> Preço: R$${item.preco}")
                                 }
                                 println("----------------------------------------------")
@@ -195,9 +188,8 @@ fun main(){
                     do {
                         print(" - Código do ${i}º item da compra: ")
                         do cod = readLine() while (cod == null)
-
                         valItem = livraria.efetuarVenda(cod)
-                        tot.plus(valItem)
+                        tot = tot.plus(valItem)
 
                         println(" **** Item de preço R$${valItem} adicionado à compra.")
                         println("Deseja adicionar mais um item à compra?")
@@ -214,12 +206,9 @@ fun main(){
                     println(" - Opção inválida!")
                 }
             }
-        } catch (e: IllegalArgumentException){
-            e.message
-            readLine()
-        } catch (e: java.lang.Exception){
-            println("ERRO INESPERADO")
-            readLine()
         }
+        catch (e: IllegalStateException){ println(e.message) }
+        catch (e: IllegalArgumentException){ println(e.message) }
+        catch (e: Exception){ println("ERRO INESPERADO") }
     }
 }
