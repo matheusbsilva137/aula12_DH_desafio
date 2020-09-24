@@ -16,22 +16,33 @@ class Livraria {
     }
 
     fun adicionarEstoque(item: Consultavel, quantidade: Int) {
-        adicionarEstoque(item.codigo, quantidade)
+        estoque[item] = (estoque.getOrDefault(item, 0) + quantidade)
     }
 
     fun adicionarEstoque(codigo: String, quantidade: Int) {
-        estoque[codigo] = estoque.getOrDefault(codigo, 0) + quantidade
+        adicionarEstoque(consultarCodigo(codigo), quantidade)
     }
 
-    fun consultarCodigo(codigo: String): Consultavel =
-            if (consultaveis.containsKey(codigo)) consultaveis[codigo]
-            else throw IllegalArgumentException("Código não cadastrado")
-
-
     fun efetuarVenda(codigo: String) {
-        if (!consultaveis.containsKey(codigo)) throw IllegalArgumentException("Código não cadastrado")
-        else if (consultaveis[codigo] <= 0) throw IllegalStateException("Item fora de estoque")
-        else consultaveis[codigo] = consultaveis[codigo] - 1
+        if (consultarEstoque(codigo) <= 0) throw IllegalStateException("Item fora sem estoque")
+        else estoque[consultarCodigo(codigo)] = consultarEstoque(codigo) - 1
+    }
+
+    fun consultarCodigo(codigo: String): Consultavel {
+        val c = consultaveis[codigo]
+        if (c == null) throw throw IllegalArgumentException("Código não cadastrado")
+        return c
+    }
+
+
+    fun consultarEstoque(codigo: String): Int {
+        return consultarEstoque(consultarCodigo(codigo))
+    }
+
+    fun consultarEstoque(item: Consultavel): Int {
+        val qt = estoque[item]
+        if (qt == null) return 0
+        return qt
     }
 
 
