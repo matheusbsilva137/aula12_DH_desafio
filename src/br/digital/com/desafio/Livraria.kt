@@ -1,5 +1,7 @@
 package br.digital.com.desafio
 
+import java.math.BigDecimal
+
 class Livraria {
     val consultaveis = mutableMapOf<String, Consultavel>()
     val estoque = mutableMapOf<Consultavel, Int>()
@@ -17,9 +19,12 @@ class Livraria {
 
     fun adicionarEstoque(codigo: String, quantidade: Int) { adicionarEstoque(consultarCodigo(codigo), quantidade) }
 
-    fun efetuarVenda(codigo: String) {
+    fun efetuarVenda(codigo: String) : BigDecimal {
         if (consultarEstoque(codigo) <= 0) throw IllegalStateException("Item sem estoque")
-        else estoque[consultarCodigo(codigo)] = consultarEstoque(codigo) - 1
+        else {
+            estoque[consultarCodigo(codigo)] = consultarEstoque(codigo) - 1
+            return consultaveis[codigo]!!.preco
+        }
     }
 
     fun consultarCodigo(codigo: String): Consultavel { return consultaveis[codigo] ?: throw IllegalArgumentException("Código não cadastrado") }
