@@ -24,14 +24,12 @@ class Livraria {
     }
 
     fun efetuarVenda(codigo: String) {
-        if (consultarEstoque(codigo) <= 0) throw IllegalStateException("Item fora sem estoque")
+        if (consultarEstoque(codigo) <= 0) throw IllegalStateException("Item sem estoque")
         else estoque[consultarCodigo(codigo)] = consultarEstoque(codigo) - 1
     }
 
     fun consultarCodigo(codigo: String): Consultavel {
-        val c = consultaveis[codigo]
-        if (c == null) throw throw IllegalArgumentException("Código não cadastrado")
-        return c
+        return consultaveis[codigo] ?: throw IllegalArgumentException("Código não cadastrado")
     }
 
 
@@ -40,9 +38,7 @@ class Livraria {
     }
 
     fun consultarEstoque(item: Consultavel): Int {
-        val qt = estoque[item]
-        if (qt == null) return 0
-        return qt
+        return estoque[item] ?: 0
     }
 
 
