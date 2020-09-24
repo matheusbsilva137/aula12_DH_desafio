@@ -10,6 +10,7 @@ class Colecao (preco: BigDecimal,
 
     init { codigo = "C${code++}"
     listaDeLivros.addAll(livros)}
+
     companion object { var code = 1000 }
 
 }

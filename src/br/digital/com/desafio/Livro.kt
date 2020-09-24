@@ -9,11 +9,10 @@ class Livro (titulo: String,
              val edicao: Int): Consultavel(preco, titulo), Comparable<Livro>{
 
     companion object { var code = 1000 }
+
     init { codigo = "L${code++}" }
 
-    override fun toString(): String {
-        return super.codigo
-    }
+    override fun toString(): String { return super.codigo }
 
     override fun compareTo(other: Livro): Int { return edicao.compareTo(other.edicao) }
 }
