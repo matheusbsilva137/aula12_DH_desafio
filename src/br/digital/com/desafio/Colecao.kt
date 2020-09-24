@@ -13,6 +13,9 @@ class Colecao (preco: BigDecimal,
     companion object { var code = 1000 }
 
     override fun toString(): String {
-        return super.codigo
+        val sb = StringBuilder()
+        sb.append(" ----> Titulo da Coleção: ${titulo}")
+        sb.append("\n ----> Preço: R$${preco}")
+        return sb.toString()
     }
 }
