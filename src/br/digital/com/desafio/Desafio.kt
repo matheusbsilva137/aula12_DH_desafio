@@ -88,6 +88,7 @@ fun main() {
                         do ent = readLine() while (ent == null)
                         cont = if (ent.isNotEmpty()) ent.toInt() else 0
                     }
+                  
                     espaco(1)
                     println(" -> $quantCadastros cadastros de livros realizados!")
                     pressEnter()
@@ -157,7 +158,7 @@ fun main() {
                 3 -> {
                     println() // Flush
                     println(" * CONSULTA DE CÓDIGO")
-                    print("Código: ")
+                    print(" >>> ")
                     val cod = readLine()
                     try {
                         val item = livraria.consultarCodigo(cod ?: "")
