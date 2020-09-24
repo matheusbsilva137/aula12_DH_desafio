@@ -60,7 +60,7 @@ fun main(){
 
                         val livro = Livro(titulo, preco, autor, anoLanc, volume)
 
-                        println(" - Deseja cadastrar a quantidade de livros? (quantidades não informadas serão usadas como ZERO)")
+                        println(" - Existe estoque disponível para esse livro? (se não informar o estoque será ZERO)")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
                         do ent = readLine() while (ent == null || (ent != "0" && ent != "1"))
@@ -119,7 +119,7 @@ fun main(){
                         }
                         var colecao = Colecao(preco, titulo, *livraria.pesquisarLivros(codigos).toTypedArray())
 
-                        println(" - Deseja cadastrar a quantidade de coleções? (quantidades não informadas serão usadas como ZERO)")
+                        println(" - Existe estoque disponível para essa coleção? (se não informar o estoque será ZERO)")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
                         do ent = readLine() while (ent == null || (ent != "0" && ent != "1"))
@@ -134,7 +134,7 @@ fun main(){
                             livraria.cadastrar(colecao, quant)
                         }
 
-                        println(" **** Coleção cadastrada com o código ${colecao.toString()}.")
+                        println(" **** Coleção cadastrada com o código ${colecao.codigo}.")
                         println("Deseja cadastrar mais uma coleção?")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
