@@ -73,7 +73,7 @@ fun main(){
                         livraria.cadastrar(livro, quant)
                     }
 
-                    println(" **** Livro cadastrado com o código ${livro.toString()}.")
+                    println(" **** ${livro.toString()} - cadastrado com sucesso.")
                     println("Deseja cadastrar mais um livro?")
                     println(" [0] - Não; [1] - Sim")
                     print(" >>> ")
