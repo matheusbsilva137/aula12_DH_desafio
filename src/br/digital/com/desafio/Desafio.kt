@@ -3,10 +3,10 @@ package br.digital.com.desafio
 import java.math.BigDecimal
 
 fun main() {
-    var op: Int = 1
-    var cont: Int = 1
-    var ent: String? = null
-    val livraria: Livraria = Livraria()
+    var op = 1
+    var cont: Int
+    var ent: String?
+    val livraria = Livraria()
 
     loop@ while (op != 0) {
         try {
@@ -28,14 +28,14 @@ fun main() {
             when (op) {
                 0 -> break@loop
                 1 -> {
-                    var quantCadastros: Int = 0
-                    var titulo: String? = null
-                    var preco: BigDecimal? = null
-                    var autor: String? = null
-                    var anoLanc: Int? = null
-                    var volume: Int? = null
-                    var informQuant: Int? = null
-                    var quant: Int? = null
+                    var quantCadastros = 0
+                    var titulo: String?
+                    var preco: BigDecimal?
+                    var autor: String?
+                    var anoLanc: Int?
+                    var volume: Int?
+                    var informQuant: Int?
+                    var quant: Int?
 
                     cont = 1
                     while (cont == 1) {
@@ -92,14 +92,14 @@ fun main() {
                     pressEnter()
                 }
                 2 -> {
-                    var quantCadastros: Int = 0
-                    var titulo: String? = null
-                    var cod: String? = null
-                    var preco: BigDecimal? = null
-                    var quantLivros: Int = 0
-                    var codigos = mutableSetOf<String>()
-                    var informQuant: Int? = null
-                    var quant: Int? = null
+                    var quantCadastros = 0
+                    var titulo: String?
+                    var cod: String?
+                    var preco: BigDecimal?
+                    var quantLivros: Int
+                    val codigos = mutableSetOf<String>()
+                    var informQuant: Int?
+                    var quant: Int?
 
                     cont = 1
                     while (cont == 1) {
@@ -124,7 +124,7 @@ fun main() {
 
                             codigos.add(cod)
                         }
-                        var colecao = Colecao(preco, titulo, *livraria.pesquisarLivros(codigos).toTypedArray())
+                        val colecao = Colecao(preco, titulo, *livraria.pesquisarLivros(codigos).toTypedArray())
 
                         espaco(2)
                         println(" - Existe estoque disponível para essa coleção? (se não informar o estoque será ZERO)")
@@ -187,10 +187,10 @@ fun main() {
                     }
                 }
                 4 -> {
-                    var i: Int = 1
+                    var i = 1
                     var tot: BigDecimal = BigDecimal.ZERO
-                    var valItem: BigDecimal = BigDecimal.ZERO
-                    var cod: String? = null
+                    var valItem: BigDecimal
+                    var cod: String?
                     do {
                         espaco(2)
                         print(" - Código do ${i}º item da compra: ")
@@ -233,7 +233,7 @@ fun main() {
                 }
                 6 -> {
                     println(" * ADICIONAR AO ESTOQUE")
-                    var ent: String?
+                    var entQt: String?
 
                     var cod: String?
                     var qt: Int
@@ -248,10 +248,10 @@ fun main() {
 
                     do {
                         print("Quantidade para adicionar: ")
-                        ent = readLine()
+                        entQt = readLine()
                         println()
-                    } while (ent == null)
-                    qt = if (ent.isNotEmpty()) ent.toInt() else 0
+                    } while (entQt == null)
+                    qt = if (entQt.isNotEmpty()) entQt.toInt() else 0
                     livraria.estoque[item] = (livraria.estoque[item] ?: 0) + qt
 
                     println(" **** ESTOQUE ATUALIZADO! NOVO TOTAL: ${livraria.estoque[item] ?: 0}")
