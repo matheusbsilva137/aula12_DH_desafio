@@ -76,6 +76,7 @@ fun main(){
                         }
 
                         println(" **** Livro cadastrado com o código ${livro.codigo}.")
+                        println(" **** ${livro.toString()}.")
                         println("Deseja cadastrar mais um livro?")
                         println(" [0] - Não; [1] - Sim")
                         print(" >>> ")
@@ -83,12 +84,6 @@ fun main(){
                         cont = ent.toInt()
                     }
 
-                    println(" **** ${livro.toString()} - cadastrado com sucesso.")
-                    println("Deseja cadastrar mais um livro?")
-                    println(" [0] - Não; [1] - Sim")
-                    print(" >>> ")
-                    do ent = readLine() while (ent == null)
-                    cont = ent.toInt()
                     println(" -> $quantCadastros cadastros de livros realizados!")
                 }
                 2 -> {
@@ -153,6 +148,7 @@ fun main(){
                 3 -> {
                     println() // Flush
                     println(" * CONSULTA DE CÓDIGO")
+                    print(" >>> ")
                     val cod = readLine()
                     try {
                         val item = livraria.consultarCodigo(cod ?: "")
