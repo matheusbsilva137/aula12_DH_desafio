@@ -1,5 +1,6 @@
 package br.digital.com.desafio
 
+import java.lang.IllegalStateException
 import java.math.BigDecimal
 
 class Livraria {
@@ -15,9 +16,7 @@ class Livraria {
         adicionarEstoque(item, quantidadeEstoque)
     }
 
-    fun adicionarEstoque(item: Consultavel, quantidade: Int) { estoque[item] = (estoque.getOrDefault(item, 0) + quantidade) }
-
-    fun adicionarEstoque(codigo: String, quantidade: Int) { adicionarEstoque(consultarCodigo(codigo), quantidade) }
+    private fun adicionarEstoque(item: Consultavel, quantidade: Int) { estoque[item] = (estoque.getOrDefault(item, 0) + quantidade) }
 
     fun efetuarVenda(codigo: String) : BigDecimal {
         if (consultarEstoque(codigo) <= 0) throw IllegalStateException("Item sem estoque")
@@ -29,9 +28,9 @@ class Livraria {
 
     fun consultarCodigo(codigo: String): Consultavel { return consultaveis[codigo] ?: throw IllegalArgumentException("Código não cadastrado") }
 
-    fun consultarEstoque(codigo: String): Int { return consultarEstoque(consultarCodigo(codigo)) }
+    private fun consultarEstoque(codigo: String): Int { return consultarEstoque(consultarCodigo(codigo)) }
 
-    fun consultarEstoque(item: Consultavel): Int { return estoque[item] ?: 0 }
+    private fun consultarEstoque(item: Consultavel): Int { return estoque[item] ?: 0 }
 
     fun pesquisarLivros(codigos: Collection<String>): List<Consultavel>{
         val lista = mutableListOf<Consultavel>()
