@@ -1,5 +1,6 @@
 package br.digital.com.desafio
 
+import java.lang.NumberFormatException
 import java.math.BigDecimal
 
 fun main() {
@@ -262,6 +263,9 @@ fun main() {
                     pressEnter()
                 }
             }
+        } catch (e: NumberFormatException) {
+            println("Erro! O número digitado é inválido! Operação cancelada.")
+            pressEnter()
         } catch (e: IllegalStateException) {
             println(e.message)
             pressEnter()
