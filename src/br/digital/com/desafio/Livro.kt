@@ -12,7 +12,7 @@ class Livro (titulo: String,
 
     init { codigo = "L${code++}" }
 
-    override fun toString(): String { return super.codigo }
+    override fun toString(): String { return "Livro nº $codigo; $titulo; $autor; $anoDeLancamento; $edicao" }
 
     override fun compareTo(other: Livro): Int { return edicao.compareTo(other.edicao) }
 }
