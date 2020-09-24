@@ -41,5 +41,9 @@ class Livraria {
         return estoque[item] ?: 0
     }
 
-
+    fun pesquisarLivros(codigos: Collection<String>): List<Consultavel>{
+        val lista = mutableListOf<Consultavel>()
+        codigos.forEach{ if(consultaveis.containsKey(it)) lista.add(consultarCodigo(it)) }
+        return lista
+    }
 }
